@@ -1,5 +1,12 @@
-_site
+node_modules
+dist
+.astro
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
+_site
 vendor
+.DS_Store
+.env
+# keep public (Astro static assets) tracked, but ignore built artifact duplication
+# dist is the build output, public is source; CI will mv dist -> public on runner

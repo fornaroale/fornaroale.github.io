@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// reading time ~180 wpm
+const wordCount = post.body ? post.body.split(/\s+/).length : 0;
+let readingTime = Math.max(1, Math.round(wordCount / 180)) + ' min read';
+
+// prev/next
+const all = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a,b) => (a.data.date?.valueOf()||0) - (b.data.date?.valueOf()||0));
+
+const idx = all.findIndex(p => p.id === post.id);
+const prev = idx > 0 ? all[idx-1] : null;
+const next = idx < all.length - 1 ? all[idx+1] : null;
+---
+<PostLayout title={post.data.title} date={post.data.date} updatedDate={post.data.updatedDate} description={post.data.description} readingTime={readingTime}>
+  <Content />
+  <div slot="nav" class="pageNavigation" style="clear: both;">
+    {prev && <a class="prev" href={`/blog/${prev.id}`}>&laquo; {prev.data.title}</a>}
+    {next && <a class="next" href={`/blog/${next.id}`}>{next.data.title} &raquo;</a>}
+  </div>
+</PostLayout>

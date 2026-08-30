@@ -1,0 +1,38 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = "dev blog of a cs student" } = Astro.props;
+const siteTitle = "alessandro/";
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title="alessandro/" href={new URL("rss.xml", Astro.site)} />
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+    <slot name="head" />
+  </head>
+  <body>
+    <Header />
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

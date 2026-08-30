@@ -1,11 +1,23 @@
-image: ruby:2.7
+image: node:20-alpine
+
+variables:
+  NODE_OPTIONS: "--max_old_space_size=4096"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .astro/
 
 pages:
+  stage: deploy
   script:
-    - bundle install
-    - bundle exec jekyll build -d public
+    - npm ci
+    - npm run build
+    # Astro builds to dist/, GitLab Pages expects public/
+    - rm -rf public && mv dist public
   artifacts:
     paths:
       - public
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"

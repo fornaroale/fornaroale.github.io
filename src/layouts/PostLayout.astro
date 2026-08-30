@@ -1,0 +1,42 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props {
+  title: string;
+  date?: Date;
+  updatedDate?: Date;
+  description?: string;
+  readingTime?: string;
+}
+const { title, date, updatedDate, description } = Astro.props;
+
+function formatDate(d?: Date) {
+  if (!d) return "";
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+const dateStr = formatDate(date);
+const updatedStr = updatedDate ? formatDate(updatedDate) : null;
+
+// reading time injected by page (word count) – fallback
+---
+<BaseLayout title={title} description={description}>
+  <a href="/blog">&laquo; Back to posts list</a>
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">{title}</h1>
+      <p class="post-meta">
+        {date && <time class="dt-published" datetime={date.toISOString()} itemprop="datePublished">{dateStr}</time>}
+        {updatedStr && (
+          <>
+            {" ~ "}
+            <time class="dt-modified" datetime={updatedDate!.toISOString()} itemprop="dateModified">{updatedStr}</time>
+          </>
+        )}
+        {Astro.props.readingTime && <> ~ {Astro.props.readingTime}</>}
+      </p>
+    </header>
+    <div class="post-content e-content" itemprop="articleBody">
+      <slot />
+    </div>
+    <slot name="nav" />
+  </article>
+</BaseLayout>

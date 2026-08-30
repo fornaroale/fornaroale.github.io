@@ -1,6 +1,7 @@
 ---
-layout: post
 title: "Get better at touch typing"
+date: 2021-09-09
+description: "How I improved my touch typing from 4 to 8 fingers and why I switched to US International layout."
 ---
 
 I used to digit over 120 WPM (_Words per minute_) on my keyboard, which is kinda high if you consider the average typing speed is around 40 WPM (_source: web_). Nonetheless, there was a problem: I was using only 4 fingers to write and ergonomics weren't really my concern. I had to improve, not to increase my writing speed, but to have a better and more correct writing experience.

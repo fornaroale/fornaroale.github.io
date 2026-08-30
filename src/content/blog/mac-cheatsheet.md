@@ -1,6 +1,7 @@
 ---
-layout: post
 title: "My macOS cheatsheet"
+date: 2022-06-28
+description: "A handy cheatsheet of macOS apps and tweaks I use daily."
 ---
 
 This isn't a blog post. It's just a page that I'll use to keep track of things I use on my mac and useful stuff I find on the Internet.
@@ -17,17 +18,25 @@ This isn't a blog post. It's just a page that I'll use to keep track of things I
 ## Tweaks
 ### Remove screenshots shadow
 If you don't care about the floating look that macOS gives to screenshots, you can disable it by terminal:  
-```defaults write com.apple.screencapture disable-shadow -bool true; killall SystemUIServer```
+```bash
+defaults write com.apple.screencapture disable-shadow -bool true; killall SystemUIServer
+```
 
 To roll back:  
-```defaults write com.apple.screencapture disable-shadow -bool false; killall SystemUIServer```
+```bash
+defaults write com.apple.screencapture disable-shadow -bool false; killall SystemUIServer
+```
 
 ### Reduce screenshots size
 It is possible to significantly reduce the size of screenshots asking the utility to produce JPEG files instead of PNGs (transparent background will get lost though):  
-```defaults write com.apple.screencapture type jpg; killall SystemUIServer```
+```bash
+defaults write com.apple.screencapture type jpg; killall SystemUIServer
+```
 
 To roll back:  
-```defaults write com.apple.screencapture type png; killall SystemUIServer```
+```bash
+defaults write com.apple.screencapture type png; killall SystemUIServer
+```
 
 ### Remap keyboard keys
 Even though there is some software to perform this operation automatically, like [Ukelele](https://software.sil.org/ukelele/) and [Karabiner](https://karabiner-elements.pqrs.org), there is a manual way to remap keyboard without needing additional software.
