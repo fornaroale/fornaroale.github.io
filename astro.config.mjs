@@ -4,9 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fornaroale.gitlab.io',
-  // base remains "/" so URLs stay https://fornaroale.gitlab.io/blog etc.
-  // Keeping same domain as before, no link change when navigating.
+  site: 'https://fornaroale.github.io',
+  // base remains "/" so URLs stay https://fornaroale.github.io/blog etc.
   base: '/',
   integrations: [mdx(), sitemap()],
   markdown: {
